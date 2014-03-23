@@ -1,0 +1,32 @@
+[
+    {
+        "keys": [
+            "ctrl+alt+x"
+        ], 
+        "command": "decrement_numbers"
+    },
+    {
+        "keys": [
+            "ctrl+alt+z"
+        ], 
+        "command": "increment_numbers"
+    },
+    {
+        "keys": [
+            "ctrl+alt+s"
+        ], 
+        "command": "generate_mathematical_progression"
+    },
+    {
+        "keys": [
+            "ctrl+r"
+        ],
+        "command": "generate_random_numbers"
+    },
+    {
+        "keys": [
+            "ctrl+shift+r"
+        ], 
+        "command": "evaluate_line"
+    }
+]
