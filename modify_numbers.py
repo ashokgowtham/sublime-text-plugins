@@ -2,6 +2,7 @@ import sublime, sublime_plugin
 import re
 import random
 from decimal import *
+from .edit import *
 
 random.seed(1)
 
@@ -21,22 +22,27 @@ class DecrementNumbersCommand(sublime_plugin.TextCommand):
 				print(text)
 				self.view.replace(edit,region,text)
 
-class GenerateMathematicalProgressionCommand(sublime_plugin.TextCommand):
-	def run(self, edit):
-		# self.window.show_input_panel("format","n+1", self.getcallback(edit), None, None)
-		self.getcallback(edit)("n")
+class GenerateMathematicalProgressionCommand(sublime_plugin.WindowCommand):
+	def run(self):
+		view = sublime.active_window().active_view();
+		self.window.show_input_panel("format","n+1", self.getcallback(view), None, None)
+		# self.getcallback(edit)("n")
 
-	def getcallback(self,edit):
+	def getcallback(self,view):
 		def callback(value):
 			format_regex="/^[0-9n\-\+]$/"
 			format=value;
 			if re.search(format_regex,format)!=None:
 				pass
 			index=0
-			for region in self.view.sel():
+			for region in view.sel():
+				edit=Edit(view);
 				text=str(eval(format.replace('n',str(index))))
-				self.view.replace(edit,region,text)
+				print(region)
+				print(text)
+				edit.replace(view.sel()[index],text)
 				index=index+1;
+				edit.complete();
 		return callback;
 
 class EvaluateLineCommand(sublime_plugin.TextCommand):
@@ -57,15 +63,15 @@ class GenerateRandomNumbersCommand(sublime_plugin.TextCommand):
 
 def increment(text):
 	try:
-		value=(Decimal(text)+Decimal(1)) if '.' in text else int(text)+1
-		return str(value)
+		value=(Decimal(text)) if '.' in text else int(text)
+		return str(value+1)
 	except Exception:
 		print("error")
 		return text
 
 def decrement(text):
 	try:
-		value=(Decimal(text)-Decimal(1)) if '.' in text else int(text)-1
-		return str(value)
+		value=(Decimal(text)) if '.' in text else int(text)
+		return str(value-1)
 	except Exception:
 		return text

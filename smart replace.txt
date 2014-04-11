@@ -1,0 +1,46 @@
+smart replace:
+A nice feature to replace multiple selections based on the selection index and
+ based on what was selected.
+Also can be used as a generic mathematical generator.
+
+primary requirements
+* multiple cursors/selection points
+* each selection can be empty or non-empty
+* replace with a fixed string
+* replace with a sequence of numbers (based on region index)
+* replace with a value evaluated from a 'formula' - enclosed in `{}`
+* replace with a string containing one or more 'formulas' evaluated in place - enclosed in `{}`
+	- formula can include the region index  `n`
+	- formula can include the source selected text  `x`
+
+additonal requirements
++ support escaping characters for replacing with `{` and `}` characters itself
++ support recursive replace format strings
+
+eg:
+// pipe symbol represent cursor
+// square brackets represent selection
+
+// (1)
+// before:
+|This is a sample text
+|This is another sample text
+
+// replace format string:
+{n+1}.
+
+// after:
+1.This is a sample text
+2.This is another sample text
+
+// (2)
+// before:
+[3]This is a sample text
+[4]This is another sample text
+
+// replace format string: (there is a space at the end)
+({x+1}) 
+
+// after:
+(4) This is a sample text
+(5) This is another sample text

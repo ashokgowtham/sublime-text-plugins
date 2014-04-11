@@ -1,0 +1,9 @@
+Foreword:
+edit.py is used within non-TextCommand commands to do text manipulations.
+
+How to avoid the need for edit.py
+write text manipulation commands as text commands
+any information required by the text command should be passed as arguments rather than the command itself trying to get from user/io/interaction
+write another command - maybe WindowCommand that does the interaction part of getting the necessary data for the TextCommand and then executes the TextCommand giving the data as arguments
+This way, interaction commands will be separated from text manipulation commands and thus the necessity for edit.py will be avoided.
+
