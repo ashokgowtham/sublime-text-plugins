@@ -61,6 +61,14 @@ class GenerateRandomNumbersCommand(sublime_plugin.TextCommand):
 			self.view.replace(edit,region,text)
 			index=index+1;
 
+class AshExpandSelectionCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		sels=self.view.sel()
+		l=len(sels)
+		for i in range(0,l-1):
+			sels[i].b=sels[i+1].a-1
+		sels[l-1].b=1000
+
 def increment(text):
 	try:
 		value=(Decimal(text)) if '.' in text else int(text)

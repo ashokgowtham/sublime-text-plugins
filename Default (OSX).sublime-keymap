@@ -28,5 +28,41 @@
             "ctrl+shift+r"
         ], 
         "command": "evaluate_line"
+    },
+    {
+        "keys": [
+            "ctrl+shift+y"
+        ], 
+        "command": "flatten_yaml"
+    },
+    {
+        "keys": [
+            "ctrl+shift+x"
+        ], 
+        "command": "convert_case"
+    },
+    {
+        "keys": [
+            "ctrl+shift+x"
+        ], 
+        "command": "ash_expand_selection"
+    },
+    {
+        "keys": [
+            "ctrl+shift+i"
+        ], 
+        "command": "intersect_selection"
+    },
+    {
+        "keys": [
+            "ctrl+shift+n"
+        ], 
+        "command": "select_till_next_selection"
+    },
+    {
+        "keys": [
+            "ctrl+shift+x"
+        ], 
+        "command": "ash_expand_selection"
     }
 ]
