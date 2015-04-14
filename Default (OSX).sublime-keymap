@@ -55,6 +55,12 @@
     },
     {
         "keys": [
+            "super+enter"
+        ],
+        "command": "open_current_link_in_mac"
+    },
+    {
+        "keys": [
             "ctrl+shift+n"
         ], 
         "command": "select_till_next_selection"
