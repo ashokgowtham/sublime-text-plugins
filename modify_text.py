@@ -7,6 +7,12 @@ random.seed(1)
 
 obj={'levelStack':[0],'valueStack':[''],'delimiter':'.'}
 autoDetectIndentPattern = False
+#
+# abcd hello
+# a    hello
+# ab   hello
+# abc  hello
+#
 
 class ConvertCaseCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
@@ -21,6 +27,21 @@ class FlattenYamlCommand(sublime_plugin.TextCommand):
 		entire_text_region=sublime.Region(0, self.view.size())
 		text=flatten_yaml_text(self.view.substr(entire_text_region))
 		self.view.replace(edit,entire_text_region,text)
+
+class PadRightCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		selections=[]	# (text, region, start_col, end_col)
+		
+		for region in self.view.sel():
+			selections.append((self.view.substr(region),region,self.view.rowcol(region.a)[1],self.view.rowcol(region.b)[1]))
+		max_end_col=max([end_col for (_,_,_,end_col) in selections])
+		padding = [' ' * (max_end_col - end_col) for (text,region,_,end_col) in selections]
+		padding.reverse()
+		print(padding)
+		for region in self.view.sel():
+			p=padding.pop()
+			print((p))
+			self.view.replace(edit,region,self.view.substr(region)+p)
 
 class IntersectSelectionCommand(sublime_plugin.TextCommand):
 	def run(self, edit):

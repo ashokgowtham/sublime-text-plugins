@@ -61,6 +61,12 @@
     },
     {
         "keys": [
+            "super+k", "right", "right"
+        ],
+        "command": "pad_right"
+    },
+    {
+        "keys": [
             "ctrl+shift+n"
         ], 
         "command": "select_till_next_selection"
