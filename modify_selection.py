@@ -1,5 +1,6 @@
 import sublime, sublime_plugin
 
+
 class GenerateSelectionCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		# get number of selections N
@@ -22,6 +23,6 @@ class SelectTillNextSelectionCommand(sublime_plugin.TextCommand):
 			sels.append(last_region)
 			last_region=region
 		sels.append(last_region)
-		sels[-1].b=self.view.size()
+		sels[-1].b=self.view.size()®
 		self.view.sel().clear()
 		self.view.sel().add_all(sels)
