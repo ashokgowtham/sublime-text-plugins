@@ -1,0 +1,6 @@
+[
+    {
+        "caption": "Group by and count(*)",
+        "command": "group_by_and_count"
+    }
+]
