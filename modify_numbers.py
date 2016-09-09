@@ -11,7 +11,6 @@ class IncrementNumbersCommand(sublime_plugin.TextCommand):
 		for region in self.view.sel():
 			if not region.empty():
 				text=increment(self.view.substr(region))
-				print(text)
 				self.view.replace(edit,region,text)
 
 class DecrementNumbersCommand(sublime_plugin.TextCommand):
@@ -19,31 +18,32 @@ class DecrementNumbersCommand(sublime_plugin.TextCommand):
 		for region in self.view.sel():
 			if not region.empty():
 				text=decrement(self.view.substr(region))
-				print(text)
 				self.view.replace(edit,region,text)
 
 class GenerateMathematicalProgressionCommand(sublime_plugin.WindowCommand):
 	def run(self):
 		view = sublime.active_window().active_view();
 		self.window.show_input_panel("format","n+1", self.getcallback(view), None, None)
-		# self.getcallback(edit)("n")
 
-	def getcallback(self,view):
+	def getcallback(self, view):
 		def callback(value):
-			format_regex="/^[0-9n\-\+]$/"
-			format=value;
-			if re.search(format_regex,format)!=None:
-				pass
-			index=0
-			for region in view.sel():
-				edit=Edit(view);
-				text=str(eval(format.replace('n',str(index))))
-				print(region)
-				print(text)
-				edit.replace(view.sel()[index],text)
-				index=index+1;
-				edit.complete();
+			# use a text command to do the actual string editting.
+			# so that only one entry is added to undo buffer and no other hacks are needed
+			view.run_command("generate_mathematical_progression_text", {"format": value})
 		return callback;
+
+
+class GenerateMathematicalProgressionTextCommand(sublime_plugin.TextCommand):
+	def run(self, edit, format):
+		format_regex = "/^[0-9n\-\+]$/"
+		if re.search(format_regex, format) != None:
+			pass
+		index = 0
+		for region in self.view.sel():
+			text = str(eval(format.replace('n', str(index))))
+			self.view.replace(edit,region, text)
+			index = index + 1;
+
 
 class EvaluateLineCommand(sublime_plugin.TextCommand):
 	def run(self, edit):

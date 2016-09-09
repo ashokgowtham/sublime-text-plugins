@@ -19,6 +19,12 @@
     },
     {
         "keys": [
+            "ctrl+shift+c"
+        ],
+        "command": "generate_cursors"
+    },
+    {
+        "keys": [
             "ctrl+r"
         ], 
         "command": "generate_random_numbers"
@@ -41,12 +47,12 @@
         ], 
         "command": "convert_case"
     },
-    {
-        "keys": [
-            "ctrl+shift+x"
-        ], 
-        "command": "ash_expand_selection"
-    },
+    // {
+    //     "keys": [
+    //         "ctrl+shift+x"
+    //     ],
+    //     "command": "ash_expand_selection"
+    // },
     {
         "keys": [
             "ctrl+shift+i"
@@ -70,11 +76,5 @@
             "ctrl+shift+n"
         ], 
         "command": "select_till_next_selection"
-    },
-    {
-        "keys": [
-            "ctrl+shift+x"
-        ], 
-        "command": "ash_expand_selection"
     }
 ]
