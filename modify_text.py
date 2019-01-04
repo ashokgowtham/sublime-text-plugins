@@ -12,10 +12,45 @@ obj = {'levelStack': [0], 'valueStack': [''], 'delimiter': '.'}
 autoDetectIndentPattern = False
 
 
+class CollectSelectionsCommand(sublime_plugin.TextCommand):
+    # Collects one or more selections in a line into a single text at the beginning of the line, combining selections using provided delimiter
+    # TODO: implement it
+    def run(self, edit):
+        pass
+        # next_case = ""
+        # for region in self.view.sel():
+        #     if not region.empty():
+        #         word = self.view.substr(region)
+        #         if next_case == "":
+        #             print("")
+        #             print("Word taken as sample: " + word)
+        #             next_case = get_next_case(word)
+        #             print(next_case)
+        #         text = convert_to_next_case(word, next_case)
+        #         self.view.replace(edit, region, text)
+
+
 class ConvertCaseCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         next_case = ""
+        for region in self.view.sel():
+            if not region.empty():
+                word = self.view.substr(region)
+                if next_case == "":
+                    print("")
+                    print("Word taken as sample: " + word)
+                    next_case = get_next_case(word)
+                    print(next_case)
+                text = convert_to_next_case(word, next_case)
+                self.view.replace(edit, region, text)
+
+
+class DeterministicSortCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit):
+        entire_text_region = sublime.Region(0, self.view.size())
+        text = deterministic_sort(self.view.substr(entire_text_region))
         for region in self.view.sel():
             if not region.empty():
                 word = self.view.substr(region)
@@ -125,6 +160,11 @@ def indentLevel(text):
 
 def getLevel():
     return obj['levelStack'][-1]
+
+
+def deterministic_sort(text):
+    lines = text.split('\n')
+    lines.sort()
 
 
 def flatten_yaml_text(text):
