@@ -31,6 +31,12 @@
     },
     {
         "keys": [
+            "ctrl+b"
+        ],
+        "command": "generate_bar_graph"
+    },
+    {
+        "keys": [
             "ctrl+shift+r"
         ], 
         "command": "evaluate_line"
